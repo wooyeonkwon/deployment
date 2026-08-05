@@ -90,11 +90,15 @@ private:
     obj->GetXaxis()->SetNdivisions(-510);
     obj->GetYaxis()->SetNdivisions(-510);
     if (o.name.find("Occupancy_Wheel_") != std::string::npos) {
-      obj->GetXaxis()->SetNdivisions(510);
+      auto* xaxis = obj->GetXaxis();
+      xaxis->SetNdivisions(1010);
+      xaxis->SetDecimals(false);
+      obj->GetXaxis()->CenterLabels(false);
+    } else {
+      obj->GetXaxis()->CenterLabels();
     }
     obj->GetXaxis()->SetLabelSize(0.05);
     obj->GetYaxis()->SetLabelSize(0.045);
-    obj->GetXaxis()->CenterLabels();
     obj->GetYaxis()->CenterLabels();
     c->SetGridx();
     c->SetGridy();
@@ -275,9 +279,54 @@ private:
         line.DrawLine(90.5, 7.5, 84.5, 7.5);
         line.DrawLine(84.5, 7.5, 84.5, 9.5);
       }
-      line.DrawLine(84.5, 9.5, 43, 9.5);
+      line.DrawLine(84.5, 9.5, 42.5, 9.5);
       //rb3
-      line.DrawLine(43, 9.5, 43, 13.5);
+      line.DrawLine(42.5, 9.5, 42.5, 13.5);
+
+      //rb4
+
+      const auto sectorPos = o.name.find("Sector_");
+
+      if (sectorPos != std::string::npos) {
+        const int sector = std::stoi(o.name.substr(sectorPos + std::string("Sector_").size()));
+
+        switch (sector) {
+          case 4:
+            line.DrawLine(42.5, 13.5, 36.5, 13.5);
+            line.DrawLine(36.5, 13.5, 36.5, 21.5);
+            break;
+
+          case 8:
+            line.DrawLine(42.5, 13.5, 48.5, 13.5);
+            line.DrawLine(48.5, 13.5, 48.5, 15.5);
+            line.DrawLine(48.5, 15.5, 36.5, 15.5);
+            line.DrawLine(36.5, 15.5, 36.5, 17.5);
+            break;
+
+          case 9:
+          case 11:
+            line.DrawLine(42.5, 13.5, 48.5, 13.5);
+            line.DrawLine(48.5, 13.5, 48.5, 15.5);
+            break;
+
+          case 10:
+            line.DrawLine(42.5, 13.5, 60.5, 13.5);
+            line.DrawLine(60.5, 13.5, 60.5, 17.5);
+            break;
+
+          case 12:
+            line.DrawLine(42.5, 13.5, 36.5, 13.5);
+            line.DrawLine(36.5, 13.5, 36.5, 15.5);
+            line.DrawLine(36.5, 15.5, 48.5, 15.5);
+            line.DrawLine(48.5, 15.5, 48.5, 17.5);
+            break;
+
+          default:
+            line.DrawLine(42.5, 13.5, 48.5, 13.5);
+            line.DrawLine(48.5, 13.5, 48.5, 17.5);
+            break;
+        }
+      }
 
       gStyle->SetOptStat( 10 );
 
