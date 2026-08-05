@@ -89,6 +89,9 @@ private:
     obj->SetStats(kFALSE);
     obj->GetXaxis()->SetNdivisions(-510);
     obj->GetYaxis()->SetNdivisions(-510);
+    if (o.name.find("Occupancy_Wheel_") != std::string::npos) {
+      obj->GetXaxis()->SetNdivisions(510);
+    }
     obj->GetXaxis()->SetLabelSize(0.05);
     obj->GetYaxis()->SetLabelSize(0.045);
     obj->GetXaxis()->CenterLabels();
@@ -256,23 +259,23 @@ private:
       TLine line;
       line.SetLineWidth(2);// Draw lines to delimitate the end of the roll
       //rb1in
-      line.DrawLine(91, 0.5, 91, 2.5);
-      line.DrawLine(91, 2.5, 85, 2.5);
+      line.DrawLine(90.5, 0.5, 90.5, 2.5);
+      line.DrawLine(90.5, 2.5, 84.5, 2.5);
       //rb1out
-      line.DrawLine(85, 2.5, 85, 4.5);
-      line.DrawLine(85, 4.5, 91, 4.5);
+      line.DrawLine(84.5, 2.5, 84.5, 4.5);
+      line.DrawLine(84.5, 4.5, 90.5, 4.5);
       //rb2in and rb2out
 
       if (o.name.find("Wheel_-2") != std::string::npos || o.name.find("Wheel_2") != std::string::npos) {
-        line.DrawLine(91, 4.5, 91, 6.5);
-        line.DrawLine(91, 6.5, 85, 6.5);
-        line.DrawLine(85, 6.5, 85, 9.5);
+        line.DrawLine(90.5, 4.5, 90.5, 6.5);
+        line.DrawLine(90.5, 6.5, 84.5, 6.5);
+        line.DrawLine(84.5, 6.5, 84.5, 9.5);
       } else {
-        line.DrawLine(91, 4.5, 91, 7.5);
-        line.DrawLine(91, 7.5, 85, 7.5);
-        line.DrawLine(85, 7.5, 85, 9.5);
+        line.DrawLine(90.5, 4.5, 90.5, 7.5);
+        line.DrawLine(90.5, 7.5, 84.5, 7.5);
+        line.DrawLine(84.5, 7.5, 84.5, 9.5);
       }
-      line.DrawLine(85, 9.5, 43, 9.5);
+      line.DrawLine(84.5, 9.5, 43, 9.5);
       //rb3
       line.DrawLine(43, 9.5, 43, 13.5);
 
